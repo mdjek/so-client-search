@@ -1,7 +1,6 @@
-import React, { Component } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
-import { QuestionList } from '../../components/lists/index';
-import PanelInfo from '../../components/PanelInfo';
+import { Link } from 'react-router-dom';
 
 const arr = {
     "items": [
@@ -62,38 +61,36 @@ const arr = {
     ],
 };
 
-class SearchResultPage extends Component {
-    selectTypeList = (typeList, value) => {
-        console.log(typeList, value);
-    };
+const QuestionListByAuthor = (props) => {
+    return (
+        <ul>
+            {props.itemList.map(item => (
+                <li className="list-item" key={item.question_id}>
+                    <p>
+                        <Link to={`question/${item.question_id}`}>
+                            {item.title}
+                        </Link>
+                    </p>
+                    <p className="list-item__ans"><span>{item.answer_count}</span></p>
+                    <div className="list-item__tags">
+                        {item.tags.map((tag, index, array) => (
+                            <span key={`${item.question_id}${tag}`}>{tag}{(index !== (array.length - 1)) && ', '}</span>
+                        ))}
+                    </div>
+                </li>
+            ))}
+        </ul>
+    );
+};
 
-    render() {
-        return (
-            <div>
-                <h2>Результаты по запросу <span></span></h2>
+QuestionListByAuthor.propTypes = {
+    itemList: PropTypes.arrayOf(
+        PropTypes.shape(),
+    )
+};
 
-                <div>
-                    {arr && arr.items
-                        && (
-                                <QuestionList
-                                    itemList={arr.items}
-                                    selectTypeList={this.selectTypeList}
-                                />
-                            )
-                    }
-                </div>
-                <div>
-                    <PanelInfo
-                        itemList={arr.items}
-                        listBy={{typeList: 'byTag', value: 'React'}}
-                    />
-                </div>
-            </div>
+QuestionListByAuthor.defaulProps = {
+    itemList: [],
+};
 
-        );
-    }
-}
-
-SearchResultPage.propTypes = {};
-
-export default SearchResultPage;
+export default QuestionListByAuthor;

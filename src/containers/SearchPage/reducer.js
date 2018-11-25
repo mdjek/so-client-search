@@ -1,9 +1,20 @@
-// import * as actionTypes from './types';
+import * as actionTypes from './types';
 
-const initialState = {};
+const initialState = {
+    questionData: [],
+};
 
 const SearchPageReducer = (state = { ...initialState }, action) => {
-    return state;
+    switch (action.type) {
+        case actionTypes.QUESTIONS_GET_FULFILLED: {
+            return {
+                ...state,
+                questionData: action.questionData,
+            };
+        }
+
+        default: return state;
+    }
 };
 
 export default SearchPageReducer;
