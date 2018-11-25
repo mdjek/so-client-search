@@ -1,13 +1,38 @@
 import React, { Component } from 'react';
-import '../App.css';
-import { SearchPage } from '../containers/SearchPage/index';
+import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import * as actions from './actions';
+import { MainPageTemplate } from '../components/pageTemplates/index';
 
 class App extends Component {
-    render() {
+    getPageTemplate = () => {
+        const { children } = this.props;
+
         return (
-            <SearchPage />
+            <MainPageTemplate {...this.props}>
+                {children}
+            </MainPageTemplate>
         );
+    };
+
+    render() {
+        return this.getPageTemplate();
     }
 }
 
-export default App;
+App.propTypes = {
+    actions: PropTypes.shape({
+        init: PropTypes.func,
+    }),
+};
+
+const mapStateToProps = () => ({
+
+});
+
+const mapDispatchToProps = dispatch => ({
+    actions: bindActionCreators(actions, dispatch),
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(App);

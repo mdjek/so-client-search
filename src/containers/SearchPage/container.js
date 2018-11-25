@@ -1,17 +1,21 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
 
 class SearchPage extends Component {
     render() {
         return (
-            <div>
+            <>
                 <form action="">
                     <input
                         type="text"
                     />
                     <button>Искать</button>
                 </form>
-            </div>
+
+                <Link to="/search-result" >Результаты</Link>
+                <Link to="/question/12312">Вопрос</Link>
+            </>
         );
     }
 }
