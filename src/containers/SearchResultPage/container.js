@@ -67,7 +67,11 @@ const arr = {
 
 class SearchResultPage extends Component {
     componentDidMount() {
-        const { actions: { getQuestionList, getQuestionListByValue } } = this.props;
+        const { actions: { init } } = this.props;
+
+        init();
+
+        console.log(this.props);
 
         // getQuestionList('react');
     }

@@ -3,7 +3,7 @@ import * as actionTypes from './types';
 const initialState = {
     questionData: [],
     panelQuestionData: [],
-    panelListParams: {}
+    panelListParams: { typeList: '', properties: { id: null, name: '' } },
 };
 
 const SearchResultPageReducer = (state = { ...initialState }, action) => {

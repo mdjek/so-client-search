@@ -2,11 +2,11 @@ import BaseAPI from './Base';
 
 class QuestionsAPI extends BaseAPI {
     getList(requestText) {
-        return this.apiClient.get(`search/advanced?key=U4DMV*8nvpm3EOpvf69Rxw((&site=stackoverflow&order=desc&sort=activity&title=${requestText}&filter=default`,);
+        return this.apiClient.get(`/2.2/search/advanced?order=desc&sort=activity&title=${requestText}&site=stackoverflow`);
     }
 
     getListByTag(tagName) {
-        return this.apiClient.get(`/2.2/questions?order=desc&sort=activity&tagged=${tagName}&site=stackoverflow`);
+        return this.apiClient.get(`questions?order=desc&sort=activity&tagged=${tagName}&site=stackoverflow`);
     }
 
     getListByAuthor(authorId) {
