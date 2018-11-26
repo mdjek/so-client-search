@@ -6,7 +6,7 @@ import {
 } from './lists/index'
 
 class PanelInfo extends Component {
-    selectList = (typeList) => {
+    renderList = (typeList) => {
         const { itemList } = this.props;
 
         switch (typeList) {
@@ -22,13 +22,43 @@ class PanelInfo extends Component {
         }
     };
 
+    componentWillUnmount() {
+        const { reset} = this.props;
+
+        reset();
+    }
+
     render() {
-        const { listBy } = this.props;
+        const {
+            listBy: {
+                typeList,
+                properties: {
+                    name,
+                }
+            },
+            reset,
+            itemList,
+        } = this.props;
 
         return (
             <div style={{border: '1px solid #ccc'}}>
-                <h3>{listBy.value}</h3>
-                {this.selectList(listBy.typeList)}
+                <i
+                    onClick={reset}
+                >Х</i>
+                {itemList && itemList.length > 0
+                    && (
+                        <h3>
+                            {'Похожие вопросы '}
+                            {typeList === 'byTag' && 'по тегу'}
+                            {typeList === 'byAuthor' && 'по автору'}
+                            {name
+                            && (<span style={{color: '#bbb'}}>{` "${name}"`}</span>)
+                            }
+                            {':'}
+                        </h3>
+                    )
+                }
+                {this.renderList(typeList)}
             </div>
         );
     };
@@ -36,6 +66,7 @@ class PanelInfo extends Component {
 
 PanelInfo.propTypes = {
     typeList: PropTypes.string,
+    itemList: PropTypes.arrayOf(PropTypes.shape()),
 };
 
 PanelInfo.defaultProps = {

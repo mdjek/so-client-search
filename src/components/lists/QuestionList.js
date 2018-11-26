@@ -3,9 +3,8 @@ import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 
 class QuestionList extends Component {
-
     render () {
-        const { itemList, selectTypeList } = this.props;
+        const { itemList, getListByValue } = this.props;
         return (
             <ul>
                 {itemList.map(item => (
@@ -18,9 +17,14 @@ class QuestionList extends Component {
                         <p
                             className="list-item__author"
                         >
-                            Автор:
+                            {'Автор: '}
                             <span
-                                onClick={() => {selectTypeList('byAuthor', item.owner.display_name)}}
+                                onClick={() => {
+                                    getListByValue('byAuthor', {
+                                        id: item.owner.user_id,
+                                        name: item.owner.display_name,
+                                    })
+                                }}
                             >
                                 {item.owner.display_name}
                             </span>
@@ -30,7 +34,10 @@ class QuestionList extends Component {
                             {item.tags.map((tag, index, array) => (
                                 <span
                                     key={`${item.question_id}${tag}`}
-                                    onClick={() => {selectTypeList('byTag', tag)}}
+                                    onClick={() => {getListByValue('byTag', {
+                                            name: tag,
+                                        })
+                                    }}
                                 >
                                     {tag}{(index !== (array.length - 1)) && ', '}
                                 </span>

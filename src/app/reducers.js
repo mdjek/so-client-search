@@ -1,8 +1,8 @@
 import { combineReducers } from 'redux';
-import { SearchPageReducer } from '../containers/SearchPage/index';
+import { SearchResultPageReducer } from '../containers/SearchResultPage/index';
 
 const AppReducers = combineReducers({
-    SearchPageReducer,
+    SearchResultPageReducer,
 });
 
 export default AppReducers;

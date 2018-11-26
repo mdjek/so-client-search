@@ -1,9 +1,37 @@
-// import * as actionTypes from './types';
+import * as actionTypes from './types';
 
-const initialState = {};
+const initialState = {
+    questionData: [],
+    panelQuestionData: [],
+    panelListParams: {}
+};
 
 const SearchResultPageReducer = (state = { ...initialState }, action) => {
-    return state;
+    switch (action.type) {
+        case actionTypes.QUESTIONS_GET_FULFILLED: {
+            return {
+                ...state,
+                questionData: action.questionData,
+            };
+        }
+
+        case actionTypes.QUESTIONS_PANEL_QUESTIONS_GET_FULFILLED: {
+            return {
+                ...state,
+                panelQuestionData: action.panelQuestionData,
+                panelListParams: action.panelListParams,
+            };
+        }
+
+        case actionTypes.QUESTIONS_RESET: {
+            return {
+                ...initialState,
+            };
+        }
+
+
+        default: return state;
+    }
 };
 
 export default SearchResultPageReducer;

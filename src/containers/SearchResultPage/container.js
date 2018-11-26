@@ -1,7 +1,10 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import { bindActionCreators } from 'redux';
+import { connect } from 'react-redux';
 import { QuestionList } from '../../components/lists/index';
 import PanelInfo from '../../components/PanelInfo';
+import * as actions from './actions';
 
 const arr = {
     "items": [
@@ -63,11 +66,24 @@ const arr = {
 };
 
 class SearchResultPage extends Component {
-    selectTypeList = (typeList, value) => {
-        console.log(typeList, value);
-    };
+    componentDidMount() {
+        const { actions: { getQuestionList, getQuestionListByValue } } = this.props;
+
+        // getQuestionList('react');
+    }
 
     render() {
+        const {
+            panelListParams,
+
+            actions: {
+                getListByValue,
+                reset,
+            }
+        } = this.props;
+
+        console.log(this.props);
+
         return (
             <div>
                 <h2>Результаты по запросу <span></span></h2>
@@ -77,16 +93,22 @@ class SearchResultPage extends Component {
                         && (
                                 <QuestionList
                                     itemList={arr.items}
-                                    selectTypeList={this.selectTypeList}
+                                    getListByValue={getListByValue}
                                 />
                             )
                     }
                 </div>
                 <div>
-                    <PanelInfo
-                        itemList={arr.items}
-                        listBy={{typeList: 'byTag', value: 'React'}}
-                    />
+                    {
+                        panelListParams && panelListParams.typeList && panelListParams.properties
+                        && (
+                            <PanelInfo
+                                itemList={arr.items}
+                                listBy={panelListParams}
+                                reset={reset}
+                            />
+                        )
+                    }
                 </div>
             </div>
 
@@ -94,6 +116,13 @@ class SearchResultPage extends Component {
     }
 }
 
-SearchResultPage.propTypes = {};
+const mapStateToProps = state => ({
+    questionData: state.SearchResultPageReducer.questionData,
+    panelListParams: state.SearchResultPageReducer.panelListParams,
+});
 
-export default SearchResultPage;
+const mapDispatchToProps = dispatch => ({
+    actions: bindActionCreators(actions, dispatch),
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(SearchResultPage);

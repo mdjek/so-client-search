@@ -6,15 +6,7 @@ import { Link } from 'react-router-dom';
 import * as actions from './actions';
 
 class SearchPage extends Component {
-    componentDidMount() {
-        const { actions: { getQuestionList } } = this.props;
-
-        // getQuestionList('react');
-    }
-
     render() {
-        console.log(this.props);
-
         return (
             <>
                 <form action="#" method="get">
@@ -33,11 +25,11 @@ class SearchPage extends Component {
 
 
 const mapStateToProps = state => ({
-    questionData: state.SearchPageReducer.questionData,
+    // questionData: state.SearchPageReducer.questionData,
 });
 
 const mapDispatchToProps = dispatch => ({
-    actions: bindActionCreators(actions, dispatch),
+    // actions: bindActionCreators(actions, dispatch),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(SearchPage);
