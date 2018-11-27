@@ -65,7 +65,7 @@ const arr = {
     ],
 };
 
-class SearchResultPage extends Component {
+class Search extends Component {
     componentDidMount() {
         const { actions: { init } } = this.props;
 
@@ -121,12 +121,12 @@ class SearchResultPage extends Component {
 }
 
 const mapStateToProps = state => ({
-    questionData: state.SearchResultPageReducer.questionData,
-    panelListParams: state.SearchResultPageReducer.panelListParams,
+    questionData: state.SearchReducer.questionData,
+    panelListParams: state.SearchReducer.panelListParams,
 });
 
 const mapDispatchToProps = dispatch => ({
     actions: bindActionCreators(actions, dispatch),
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(SearchResultPage);
+export default connect(mapStateToProps, mapDispatchToProps)(Search);

@@ -14,7 +14,7 @@ export const getList = responseText => dispatch => (
 );
 
 export const getListByValue = (typeList, properties) => (dispatch, getState) => {
-    const prevPanelListParams = getState().SearchResultPageReducer.panelListParams;
+    const prevPanelListParams = getState().SearchReducer.panelListParams;
 
 
     if (prevPanelListParams.typeList !== typeList

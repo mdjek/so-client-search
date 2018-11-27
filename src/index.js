@@ -9,10 +9,10 @@ import AppRoot from './app/AppRoot';
 import AppReducers from './app/reducers'
 import './index.css';
 
-export const createReducers = history => AppReducers(history);
+const createReducers = history => AppReducers(history);
 
 const store = createStore(
-    createReducers(AppReducers),
+    createReducers(AppHistory),
     compose(
         applyMiddleware(
             thunk,

@@ -6,7 +6,7 @@ const initialState = {
     panelListParams: { typeList: '', properties: { id: null, name: '' } },
 };
 
-const SearchResultPageReducer = (state = { ...initialState }, action) => {
+const SearchReducer = (state = { ...initialState }, action) => {
     switch (action.type) {
         case actionTypes.QUESTIONS_GET_FULFILLED: {
             return {
@@ -34,4 +34,4 @@ const SearchResultPageReducer = (state = { ...initialState }, action) => {
     }
 };
 
-export default SearchResultPageReducer;
+export default SearchReducer;
