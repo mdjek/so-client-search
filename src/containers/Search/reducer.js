@@ -23,6 +23,14 @@ const SearchReducer = (state = { ...initialState }, action) => {
             };
         }
 
+        case actionTypes.QUESTIONS_PANEL_RESET: {
+            return {
+                ...state,
+                panelQuestionData: [],
+                panelListParams: { typeList: '', properties: { id: null, name: '' } },
+            };
+        }
+
         case actionTypes.QUESTIONS_RESET: {
             return {
                 ...initialState,

@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
 import { QuestionList } from '../../components/lists/index';
 import PanelInfo from '../../components/PanelInfo';
 import * as actions from './actions';
@@ -70,14 +71,18 @@ class Search extends Component {
         const { actions: { init } } = this.props;
 
         init();
+    }
 
-        console.log(this.props);
+    componentWillUnmount() {
+        const { actions: { reset } } = this.props;
 
-        // getQuestionList('react');
+        reset();
     }
 
     render() {
         const {
+            questionData,
+            panelQuestionData,
             panelListParams,
 
             actions: {
@@ -91,12 +96,13 @@ class Search extends Component {
         return (
             <div>
                 <h2>Результаты по запросу <span></span></h2>
+                <Link to="/">изменить запрос</Link>
 
                 <div>
-                    {arr && arr.items
+                    {questionData
                         && (
                                 <QuestionList
-                                    itemList={arr.items}
+                                    itemList={questionData}
                                     getListByValue={getListByValue}
                                 />
                             )
@@ -104,10 +110,11 @@ class Search extends Component {
                 </div>
                 <div>
                     {
-                        panelListParams && panelListParams.typeList && panelListParams.properties
+                        panelQuestionData && panelQuestionData.length > 0
+                        && panelListParams && panelListParams.typeList
                         && (
                             <PanelInfo
-                                itemList={arr.items}
+                                itemList={panelQuestionData}
                                 listBy={panelListParams}
                                 reset={reset}
                             />
@@ -122,6 +129,7 @@ class Search extends Component {
 
 const mapStateToProps = state => ({
     questionData: state.SearchReducer.questionData,
+    panelQuestionData: state.SearchReducer.panelQuestionData,
     panelListParams: state.SearchReducer.panelListParams,
 });
 

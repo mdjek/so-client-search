@@ -1,10 +1,10 @@
 import api from '../../api/index';
-import * as actionTypes from './types';
 import AppHistory from '../../app/history';
+import * as actionTypes from './types';
 import getQueryParams from '../../lib/utils/locationExtensions';
 
 export const getList = responseText => dispatch => (
-    api.questions.getQuestionList(responseText)
+    api.questions.getList(responseText)
         .then((data) => {
             dispatch({
                 type: actionTypes.QUESTIONS_GET_FULFILLED,
@@ -29,14 +29,16 @@ export const getListByValue = (typeList, properties) => (dispatch, getState) => 
                 //     panelListParams: {typeList, properties},
                 // });
 
-                // return (api.questions.getListByTag(name)
-                //     .then((data) => {
-                //         dispatch({
-                //             type: actionTypes.QUESTIONS_PANEL_QUESTIONS_GET_FULFILLED,
-                //             panelQuestionData: data.items,
-                //             panelListParams: {typeList, properties}
-                //         });
-                //     }))
+                return (api.questions.getListByTag(name)
+                    .then((data) => {
+                        console.log(data);
+
+                        dispatch({
+                            type: actionTypes.QUESTIONS_PANEL_QUESTIONS_GET_FULFILLED,
+                            panelQuestionData: data.items,
+                            panelListParams: {typeList, properties}
+                        });
+                    }))
             }
 
             case 'byAuthor': {
@@ -47,14 +49,16 @@ export const getListByValue = (typeList, properties) => (dispatch, getState) => 
                 //     panelListParams: {typeList, properties},
                 // });
 
-                // return (api.questions.getListByAuthor(id)
-                //     .then((data) => {
-                //         dispatch({
-                //             type: actionTypes.QUESTIONS_PANEL_QUESTIONS_GET_FULFILLED,
-                //             panelQuestionData: data.items,
-                //             panelListParams: {typeList, properties},
-                //         });
-                //     }))
+                return (api.questions.getListByAuthor(id)
+                    .then((data) => {
+                        console.log(data);
+
+                        dispatch({
+                            type: actionTypes.QUESTIONS_PANEL_QUESTIONS_GET_FULFILLED,
+                            panelQuestionData: data.items,
+                            panelListParams: {typeList, properties},
+                        });
+                    }))
             }
 
             default: return;
@@ -62,13 +66,23 @@ export const getListByValue = (typeList, properties) => (dispatch, getState) => 
     }
 };
 
+
+export const resetPanel = () => dispatch => (
+    dispatch({
+        type: actionTypes.QUESTIONS_PANEL_RESET,
+    })
+);
+
 export const reset = () => dispatch => (
     dispatch({
         type: actionTypes.QUESTIONS_RESET,
     })
 );
 
-export const init = (responseText) => dispatch => {
+export const init = () => dispatch => {
+    const { location: { search } } = AppHistory;
+    const responseText = getQueryParams('text', search);
+
     if (responseText) {
         dispatch(getList(responseText));
     }

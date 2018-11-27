@@ -1,17 +1,18 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import * as actions from './actions';
 
 class Main extends Component {
-    state= {
+    state = {
         responseText: '',
     };
 
     changeHandler = (event) => {
         this.setState({
-            responseText: event.target.value,
+            responseText: event.target.value.trim(),
         });
     };
 
@@ -24,6 +25,8 @@ class Main extends Component {
     };
 
     render() {
+        const { responseText } = this.state;
+
         return (
             <>
                 <form
@@ -35,7 +38,11 @@ class Main extends Component {
                         name="search"
                         onChange={this.changeHandler}
                     />
-                    <button>Искать</button>
+                    <button
+                        disabled={ responseText === '' }
+                    >
+                        {'Искать'}
+                    </button>
                 </form>
 
                 <Link to="/search" >Результаты</Link>
@@ -44,6 +51,10 @@ class Main extends Component {
         );
     }
 }
+
+Main.propTypes = {
+    goTo: PropTypes.func,
+};
 
 const mapStateToProps = () => ({});
 

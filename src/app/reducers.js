@@ -1,14 +1,16 @@
 // import AppHistory from '../app/history';
 import { combineReducers } from 'redux';
+import { connectRouter } from 'connected-react-router';
 import { MainReducer } from '../containers/Main/index';
 import { SearchReducer } from '../containers/Search/index';
-import { connectRouter } from 'connected-react-router';
+import { QuestionReducer } from '../containers/Question/index';
 
 const AppReducers = (history) => (
     combineReducers({
         router: connectRouter(history),
         MainReducer,
         SearchReducer,
+        QuestionReducer,
     })
 );
 
