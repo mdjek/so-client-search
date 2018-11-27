@@ -68,7 +68,7 @@ const QuestionListByTag = (props) => {
             {props.itemList.map(item => (
                 <li className="list-item" key={item.question_id}>
                     <p>
-                        <Link to={`question/${item.question_id}`}>
+                        <Link to={`/question/${item.question_id}`}>
                             {item.title}
                         </Link>
                     </p>
