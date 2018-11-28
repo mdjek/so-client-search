@@ -45,17 +45,17 @@ class PanelInfo extends Component {
                 <span
                     className="panel-info__close"
                     onClick={resetPanel}
-                >X</span>
+                />
                 {itemList && itemList.length > 0
                     && (
-                        <h4>
+                        <h3>
                             {typeList === 'byTag' && 'Похожие вопросы по тегу'}
                             {typeList === 'byAuthor' && 'Другие вопросы автора'}
                             {name
                             && (<span style={{color: '#bbb'}}>{` "${name}"`}</span>)
                             }
                             {':'}
-                        </h4>
+                        </h3>
                     )
                 }
                 {this.renderList(typeList)}

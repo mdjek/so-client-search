@@ -1,3 +1,7 @@
 .text-right {
     float: right;
 }
+
+.cursor-default {
+    cursor: default;
+}

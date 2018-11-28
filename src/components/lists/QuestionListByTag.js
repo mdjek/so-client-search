@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import { getNumberCase } from '../../lib/utils/stringExtensions';
+import { tsToDate } from '../../lib/utils/dateExtensions';
 
 const arr = {
     "items": [
@@ -64,16 +65,22 @@ const arr = {
 
 const QuestionListByTag = (props) => {
     return (
-        <ul>
+        <ul className="question-list">
             {props.itemList.map(item => (
-                <li className="list-item" key={item.question_id}>
-                    <p>
+                <li className="question-item" key={item.question_id}>
+                    <p className="question-item__title">
                         <Link to={`/question/${item.question_id}`}>
                             {item.title}
                         </Link>
                     </p>
-                    <p className="list-item__author">Автор: <span>{item.owner.display_name}</span></p>
-                    <p className="list-item__ans"><span>{item.answer_count} {getNumberCase(item.answer_count, 'ответ', 'ответа', 'ответов')}</span></p>
+                    <p className="question-item__ans"><span>{item.answer_count} {getNumberCase(item.answer_count, 'ответ', 'ответа', 'ответов')}</span></p>
+                    <p
+                        className="question-item__author cursor-default"
+                    >
+                        {'Автор: '}
+                        <span>{item.owner.display_name}</span>
+                    </p>
+                    <p className="question-item__date">Добавлен: {tsToDate(item.creation_date)}</p>
                 </li>
             ))}
         </ul>

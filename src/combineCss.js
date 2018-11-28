@@ -5,5 +5,13 @@ import './css/layout.css';
 import './css/panel-info.css';
 import './css/helpers.css';
 
+// headings
+import './css/shared/headings.css';
+
 // components
+import './css/components/nav.css';
 import './css/components/search-block.css';
+import './css/components/answer-list.css';
+import './css/components/question-list.css';
+import './css/components/tags.css';
+import './css/components/question-info.css';

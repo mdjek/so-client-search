@@ -6,7 +6,7 @@ export const getQuestion = questionId => dispatch => (
         .then((data) => {
             dispatch({
                 type: actionTypes.QUESTIONS_GET_QUESTION_FULFILLED,
-                question: data.items[0],
+                question: data.items && data.items.length > 0 ? data.items[0] : {},
             });
         })
 );

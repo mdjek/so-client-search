@@ -1,0 +1,33 @@
+.question-list {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.question-item {
+    margin: 0 0 25px;
+    background: #fafafa;
+    padding: 15px;
+}
+
+.question-item:hover {
+    background: #f6f6f6;
+}
+
+.question-item__title {
+    font-size: 20px;
+}
+
+.question-item__author span, .question-item__ans span {
+    cursor: pointer;
+}
+
+.question-item__author.cursor-default span {
+    cursor: default;
+}
+
+.question-item__author,
+.question-item__date {
+    color: #aaa;
+    font-size: 14px;
+}

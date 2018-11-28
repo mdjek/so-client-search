@@ -1,0 +1,34 @@
+.answer-list {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.answer-list li {
+    position: relative;
+    border-top: 1px solid #e1e1e1;
+    border-bottom: 1px solid #e1e1e1;
+    padding: 15px 15px 5px;
+    margin: 0 0 15px;
+    background: #fafafa;
+}
+
+.answer-list .accepted {
+
+}
+
+.answer-list .accepted:before {
+    position: absolute;
+    top: 0;
+    left: -40px;
+    font-size: 35px;
+    color: #5fba7d;
+    content: "✔";
+
+}
+
+.answer-list .answer-info {
+    margin-top: 10px;
+    color: #aaa;
+    font-size: 14px;
+}
