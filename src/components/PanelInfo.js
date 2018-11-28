@@ -23,9 +23,9 @@ class PanelInfo extends Component {
     };
 
     componentWillUnmount() {
-        const { reset} = this.props;
+        const { resetPanel } = this.props;
 
-        reset();
+        resetPanel();
     }
 
     render() {
@@ -36,26 +36,26 @@ class PanelInfo extends Component {
                     name,
                 }
             },
-            reset,
+            resetPanel,
             itemList,
         } = this.props;
 
         return (
-            <div style={{border: '1px solid #ccc'}}>
-                <i
-                    onClick={reset}
-                >Х</i>
+            <div className="panel-info">
+                <span
+                    className="panel-info__close"
+                    onClick={resetPanel}
+                >X</span>
                 {itemList && itemList.length > 0
                     && (
-                        <h3>
-                            {'Похожие вопросы '}
-                            {typeList === 'byTag' && 'по тегу'}
-                            {typeList === 'byAuthor' && 'по автору'}
+                        <h4>
+                            {typeList === 'byTag' && 'Похожие вопросы по тегу'}
+                            {typeList === 'byAuthor' && 'Другие вопросы автора'}
                             {name
                             && (<span style={{color: '#bbb'}}>{` "${name}"`}</span>)
                             }
                             {':'}
-                        </h3>
+                        </h4>
                     )
                 }
                 {this.renderList(typeList)}
@@ -65,6 +65,9 @@ class PanelInfo extends Component {
 }
 
 PanelInfo.propTypes = {
+    resetPanel: PropTypes.func,
+    id: PropTypes.number,
+    name: PropTypes.string,
     typeList: PropTypes.string,
     itemList: PropTypes.arrayOf(PropTypes.shape()),
 };

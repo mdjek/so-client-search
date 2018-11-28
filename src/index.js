@@ -7,7 +7,7 @@ import thunk from 'redux-thunk';
 import AppHistory from './app/history';
 import AppRoot from './app/AppRoot';
 import AppReducers from './app/reducers'
-import './index.css';
+import './combineCss';
 
 const createReducers = history => AppReducers(history);
 

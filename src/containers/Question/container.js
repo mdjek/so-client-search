@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import * as actions from './actions';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-// import PropTypes from 'prop-types';
 
 const items = [
     {
@@ -84,7 +84,7 @@ class Question extends Component {
             actions: { init }
         } = this.props;
 
-        init(42192346);
+        init(id);
     }
 
     componentWillUnmount() {
@@ -96,17 +96,20 @@ class Question extends Component {
     }
 
     render() {
-        const item = items[0];
-
-        console.log(this.props);
-
         const { question, answers } = this.props;
 
         return (
             <>
-                <h1>{question.title}</h1>
-                <div>{question.body}</div>
-                <hr/>
+                {question && question.title
+                    ? (
+                        <>
+                            <h1>{question.title}</h1>
+                            <div>{question.body}</div>
+                            <hr/>
+                        </>
+                    )
+                    : <h2>Вопрос не найден</h2>
+                }
 
                 {question.answer_count > 0 ? (
                         <div>
@@ -128,6 +131,18 @@ class Question extends Component {
         );
     }
 }
+
+Question.propTypes = {
+    question: PropTypes.shape(),
+    answers: PropTypes.arrayOf(
+        PropTypes.shape(),
+    ),
+};
+
+Question.defaultProps = {
+    question: {},
+    answers: [],
+};
 
 const mapStateToProps = state => ({
     question: state.QuestionReducer.question,

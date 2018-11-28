@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
+import { getNumberCase } from '../../lib/utils/stringExtensions';
 
 class QuestionList extends Component {
     render () {
@@ -29,7 +30,7 @@ class QuestionList extends Component {
                                 {item.owner.display_name}
                             </span>
                         </p>
-                        <p className="list-item__ans"><span>{item.answer_count}</span></p>
+                        <p className="list-item__ans"><span>{item.answer_count} {getNumberCase(item.answer_count, 'ответ', 'ответа', 'ответов')}</span></p>
                         <div className="list-item__tags">
                             {item.tags.map((tag, index, array) => (
                                 <span

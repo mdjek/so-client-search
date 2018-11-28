@@ -3,8 +3,12 @@ import AppHistory from '../../app/history';
 import * as actionTypes from './types';
 import getQueryParams from '../../lib/utils/locationExtensions';
 
-export const getList = responseText => dispatch => (
-    api.questions.getList(responseText)
+export const goTo = (requestText) => () => {
+    AppHistory.push(`/search/?text=${requestText}`);
+};
+
+export const getList = requestText => dispatch => (
+    api.questions.getList(requestText)
         .then((data) => {
             dispatch({
                 type: actionTypes.QUESTIONS_GET_FULFILLED,
@@ -16,18 +20,12 @@ export const getList = responseText => dispatch => (
 export const getListByValue = (typeList, properties) => (dispatch, getState) => {
     const prevPanelListParams = getState().SearchReducer.panelListParams;
 
-
     if (prevPanelListParams.typeList !== typeList
             || prevPanelListParams.properties.name !== properties.name) {
 
         switch (typeList) {
             case 'byTag': {
                 const { name } = properties;
-
-                // dispatch({
-                //     type: actionTypes.QUESTIONS_PANEL_QUESTIONS_GET_FULFILLED,
-                //     panelListParams: {typeList, properties},
-                // });
 
                 return (api.questions.getListByTag(name)
                     .then((data) => {
@@ -43,11 +41,6 @@ export const getListByValue = (typeList, properties) => (dispatch, getState) => 
 
             case 'byAuthor': {
                 const { id } = properties;
-
-                // dispatch({
-                //     type: actionTypes.QUESTIONS_PANEL_QUESTIONS_GET_FULFILLED,
-                //     panelListParams: {typeList, properties},
-                // });
 
                 return (api.questions.getListByAuthor(id)
                     .then((data) => {
@@ -66,7 +59,6 @@ export const getListByValue = (typeList, properties) => (dispatch, getState) => 
     }
 };
 
-
 export const resetPanel = () => dispatch => (
     dispatch({
         type: actionTypes.QUESTIONS_PANEL_RESET,
@@ -81,9 +73,9 @@ export const reset = () => dispatch => (
 
 export const init = () => dispatch => {
     const { location: { search } } = AppHistory;
-    const responseText = getQueryParams('text', search);
+    const requestText = getQueryParams('text', search);
 
-    if (responseText) {
-        dispatch(getList(responseText));
+    if (requestText) {
+        dispatch(getList(requestText));
     }
 };

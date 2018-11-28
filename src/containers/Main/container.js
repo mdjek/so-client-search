@@ -3,51 +3,67 @@ import PropTypes from 'prop-types';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
-import * as actions from './actions';
+import * as SearchActions from '../Search/actions';
 
 class Main extends Component {
     state = {
-        responseText: '',
+        requestText: '',
     };
 
     changeHandler = (event) => {
         this.setState({
-            responseText: event.target.value.trim(),
+            requestText: event.target.value.trim(),
         });
     };
 
     searchHandler = (event) => {
         const { actions: { goTo }} = this.props;
-        const { responseText } = this.state;
+        const { requestText } = this.state;
 
         event.preventDefault();
-        goTo(responseText);
+
+        if (requestText) {
+            goTo(requestText);
+        }
     };
 
     render() {
-        const { responseText } = this.state;
-
         return (
-            <>
-                <form
-                    action="#"
-                    method="get"
-                    onSubmit={this.searchHandler}>
-                    <input
-                        type="text"
-                        name="search"
-                        onChange={this.changeHandler}
-                    />
-                    <button
-                        disabled={ responseText === '' }
-                    >
-                        {'Искать'}
-                    </button>
-                </form>
+            <div className="row">
+                <div className="col-xs-offset-3 col-xs-6">
+                    <div className="search-block">
+                        <form
+                            action="#"
+                            method="get"
+                            onSubmit={this.searchHandler}
+                        >
+                            <div className="form-group row">
+                                <div className="col-xs-9">
+                                    <input
+                                        type="text"
+                                        name="search"
+                                        className="form-control"
+                                        placeholder="Ваш запрос"
+                                        onChange={this.changeHandler}
+                                    />
+                                </div>
 
-                <Link to="/search" >Результаты</Link>
-                <Link to="/question/12312">Вопрос</Link>
-            </>
+                                <div className="col-xs-3">
+                                    <button
+                                        className="btn btn-primary form-control"
+                                    >
+                                        {'Искать'}
+                                    </button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    <div>
+                        <Link to="/search" >Результаты</Link>
+                        <Link to="/question/12312">Вопрос</Link>
+                    </div>
+                </div>
+            </div>
         );
     }
 }
@@ -59,7 +75,7 @@ Main.propTypes = {
 const mapStateToProps = () => ({});
 
 const mapDispatchToProps = dispatch => ({
-    actions: bindActionCreators(actions, dispatch),
+    actions: bindActionCreators(SearchActions, dispatch),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Main);

@@ -1,0 +1,19 @@
+.panel-info {
+    border: 1px solid #ccc;
+    padding: 25px 15px 15px;
+    border-radius: 5px;
+    position: relative;
+}
+
+.panel-info__close {
+    cursor: pointer;
+    position: absolute;
+    right: 10px;
+    top: 5px;
+    font-size: 20px;
+}
+
+.panel-info h4 {
+    margin-top: 10px;
+}
+

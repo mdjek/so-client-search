@@ -5,10 +5,12 @@ const MainPageTemplate = (props) => {
     const { children } = props;
 
     return (
-        <div className="wrapper">
-            <main className="main">
-                { children }
-            </main>
+        <div className="container-fluid">
+            <div className="wrapper">
+                <div className="main">
+                    { children }
+                </div>
+            </div>
         </div>
     );
 };

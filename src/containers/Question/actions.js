@@ -22,8 +22,10 @@ export const getAnswers = questionId => dispatch => (
 );
 
 export const init = questionId => (dispatch) => {
-    dispatch(getQuestion(questionId));
-    dispatch(getAnswers(questionId));
+    if (questionId) {
+        dispatch(getQuestion(questionId));
+        dispatch(getAnswers(questionId));
+    }
 };
 
 export const reset = () => (dispatch) => {

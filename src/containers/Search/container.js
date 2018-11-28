@@ -6,6 +6,8 @@ import { Link } from 'react-router-dom';
 import { QuestionList } from '../../components/lists/index';
 import PanelInfo from '../../components/PanelInfo';
 import * as actions from './actions';
+import AppHistory from '../../app/history';
+import getQueryParams from '../../lib/utils/locationExtensions';
 
 const arr = {
     "items": [
@@ -79,6 +81,12 @@ class Search extends Component {
         reset();
     }
 
+    getRequestText = () => {
+        const { location: { search } } = AppHistory;
+
+        return getQueryParams('text', search);
+    };
+
     render() {
         const {
             questionData,
@@ -87,45 +95,70 @@ class Search extends Component {
 
             actions: {
                 getListByValue,
-                reset,
+                resetPanel,
             }
         } = this.props;
 
-        console.log(this.props);
-
         return (
-            <div>
-                <h2>Результаты по запросу <span></span></h2>
-                <Link to="/">изменить запрос</Link>
-
-                <div>
-                    {questionData
-                        && (
-                                <QuestionList
-                                    itemList={questionData}
-                                    getListByValue={getListByValue}
+            <>
+                <div className="row">
+                    <div className="col-sm-12">
+                        <h2>
+                            {'Результаты '}
+                            { this.getRequestText()
+                                && (<>
+                                    {'по запросу '}
+                                    <span style={{ color: '#ccc' }}>"{this.getRequestText()}"</span>
+                                    {':'}
+                                </>)
+                            }
+                        </h2>
+                        <Link to="/">новый поиск</Link>
+                    </div>
+                </div>
+                <div className="row">
+                    <div className="col-sm-8">
+                        {questionData
+                            && (
+                                    <div>
+                                        <QuestionList
+                                            itemList={questionData}
+                                            getListByValue={getListByValue}
+                                        />
+                                    </div>
+                                )
+                        }
+                    </div>
+                    <div className="col-sm-4">
+                        {
+                            panelQuestionData && panelQuestionData.length > 0
+                            && panelListParams && panelListParams.typeList
+                            && (
+                                <PanelInfo
+                                    itemList={panelQuestionData}
+                                    listBy={panelListParams}
+                                    resetPanel={resetPanel}
                                 />
                             )
-                    }
+                        }
+                    </div>
                 </div>
-                <div>
-                    {
-                        panelQuestionData && panelQuestionData.length > 0
-                        && panelListParams && panelListParams.typeList
-                        && (
-                            <PanelInfo
-                                itemList={panelQuestionData}
-                                listBy={panelListParams}
-                                reset={reset}
-                            />
-                        )
-                    }
-                </div>
-            </div>
-
+            </>
         );
     }
 }
+
+Search.propTypes = {
+    actions: {
+        init: PropTypes.func,
+        reset: PropTypes.func,
+        getListByValue: PropTypes.func,
+        resetPanel: PropTypes.func,
+    },
+    questionData: PropTypes.arrayOf(PropTypes.shape()),
+    panelQuestionData: PropTypes.arrayOf(PropTypes.shape()),
+    panelListParams: PropTypes.shape(),
+};
 
 const mapStateToProps = state => ({
     questionData: state.SearchReducer.questionData,

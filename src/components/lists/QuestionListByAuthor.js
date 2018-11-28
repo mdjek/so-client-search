@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
+import { getNumberCase } from '../../lib/utils/stringExtensions';
 
 const arr = {
     "items": [
@@ -71,7 +72,7 @@ const QuestionListByAuthor = (props) => {
                             {item.title}
                         </Link>
                     </p>
-                    <p className="list-item__ans"><span>{item.answer_count}</span></p>
+                    <p className="list-item__ans"><span>{item.answer_count} {getNumberCase(item.answer_count, 'ответ', 'ответа', 'ответов')}</span></p>
                     <div className="list-item__tags">
                         {item.tags.map((tag, index, array) => (
                             <span key={`${item.question_id}${tag}`}>{tag}{(index !== (array.length - 1)) && ', '}</span>

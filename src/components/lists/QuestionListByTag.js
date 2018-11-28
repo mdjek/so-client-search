@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
-import QuestionList from './QuestionList';
+import { getNumberCase } from '../../lib/utils/stringExtensions';
 
 const arr = {
     "items": [
@@ -73,7 +73,7 @@ const QuestionListByTag = (props) => {
                         </Link>
                     </p>
                     <p className="list-item__author">Автор: <span>{item.owner.display_name}</span></p>
-                    <p className="list-item__ans"><span>{item.answer_count}</span></p>
+                    <p className="list-item__ans"><span>{item.answer_count} {getNumberCase(item.answer_count, 'ответ', 'ответа', 'ответов')}</span></p>
                 </li>
             ))}
         </ul>
