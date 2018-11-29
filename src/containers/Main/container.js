@@ -58,10 +58,6 @@ class Main extends Component {
                             </div>
                         </form>
                     </div>
-                    <div>
-                        <Link to="/search" >Результаты</Link>
-                        <Link to="/question/12312">Вопрос</Link>
-                    </div>
                 </div>
             </div>
         );
