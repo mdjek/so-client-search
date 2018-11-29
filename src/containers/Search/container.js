@@ -799,17 +799,12 @@ class Search extends Component {
         reset();
     }
 
-    getRequestText = () => {
-        const { location: { search } } = AppHistory;
-
-        return getQueryParams('text', search);
-    };
-
     render() {
         const {
             questionData,
             panelQuestionData,
             panelListParams,
+            requestText,
 
             actions: {
                 getListByValue,
@@ -828,10 +823,10 @@ class Search extends Component {
                     <div className="col-sm-12">
                         <h2>
                             {'Результаты '}
-                            { this.getRequestText()
+                            { requestText
                                 && (<>
                                     {'по запросу '}
-                                    <span style={{ color: '#ccc' }}>"{this.getRequestText()}"</span>
+                                    <span style={{ color: '#ccc' }}>"{requestText}"</span>
                                     {':'}
                                 </>)
                             }
@@ -846,6 +841,7 @@ class Search extends Component {
                                         <QuestionList
                                             itemList={questionData}
                                             getListByValue={getListByValue}
+                                            requestText={requestText}
                                         />
                                     </div>
                                 )
@@ -860,6 +856,7 @@ class Search extends Component {
                                     itemList={panelQuestionData}
                                     listBy={panelListParams}
                                     resetPanel={resetPanel}
+                                    requestText={requestText}
                                 />
                             )
                         }
@@ -871,21 +868,23 @@ class Search extends Component {
 }
 
 Search.propTypes = {
-    actions: {
+    actions: PropTypes.shape({
         init: PropTypes.func,
         reset: PropTypes.func,
         getListByValue: PropTypes.func,
         resetPanel: PropTypes.func,
-    },
+    }),
     questionData: PropTypes.arrayOf(PropTypes.shape()),
     panelQuestionData: PropTypes.arrayOf(PropTypes.shape()),
     panelListParams: PropTypes.shape(),
+    requestText: PropTypes.string,
 };
 
 const mapStateToProps = state => ({
     questionData: state.SearchReducer.questionData,
     panelQuestionData: state.SearchReducer.panelQuestionData,
     panelListParams: state.SearchReducer.panelListParams,
+    requestText: state.SearchReducer.requestText,
 });
 
 const mapDispatchToProps = dispatch => ({

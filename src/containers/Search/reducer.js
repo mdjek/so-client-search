@@ -3,6 +3,7 @@ import * as actionTypes from './types';
 const initialState = {
     questionData: [],
     panelQuestionData: [],
+    requestText: '',
     panelListParams: { typeList: '', properties: { id: null, name: '' } },
 };
 
@@ -13,6 +14,13 @@ const SearchReducer = (state = { ...initialState }, action) => {
                 ...state,
                 questionData: action.questionData,
             };
+        }
+
+        case actionTypes.QUESTIONS_GET_REQUEST_TEXT: {
+            return {
+                ...state,
+                requestText: action.requestText,
+            }
         }
 
         case actionTypes.QUESTIONS_PANEL_QUESTIONS_GET_FULFILLED: {

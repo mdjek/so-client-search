@@ -17,6 +17,13 @@ export const getList = requestText => dispatch => (
         })
 );
 
+export const getRequestText = (requestText) => dispatch => {
+    dispatch({
+        type: actionTypes.QUESTIONS_GET_REQUEST_TEXT,
+        requestText,
+    });
+};
+
 export const getListByValue = (typeList, properties) => (dispatch, getState) => {
     const prevPanelListParams = getState().SearchReducer.panelListParams;
 
@@ -76,6 +83,7 @@ export const init = () => dispatch => {
     const requestText = getQueryParams('text', search);
 
     if (requestText) {
+        dispatch(getRequestText(requestText));
         dispatch(getList(requestText));
     }
 };

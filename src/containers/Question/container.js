@@ -5,6 +5,8 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { tsToDate } from '../../lib/utils/dateExtensions';
 import { Link } from 'react-router-dom';
+import AppHistory from '../../app/history';
+import getQueryParams from '../../lib/utils/locationExtensions';
 
 const items = [
     {
@@ -152,6 +154,15 @@ class Question extends Component {
         reset();
     }
 
+    getRequestText = () => {
+        const { location: { search } } = AppHistory;
+        const requestText = getQueryParams('refer', search);
+
+        if (requestText) {
+            return requestText;
+        }
+    };
+
     renderMarkup = (prop) => {
         return (
             <div dangerouslySetInnerHTML={{
@@ -168,11 +179,15 @@ class Question extends Component {
         return (
             <>
                 <ul className="nav nav-pills">
+                    {
+                        this.getRequestText() && (
+                            <li role="presentation">
+                                <Link to={`/search/?text=${this.getRequestText()}`}>← Вернуться к результатам</Link>
+                            </li>
+                        )
+                    }
                     <li role="presentation">
                         <Link to="/">Новый поиск</Link>
-                    </li>
-                    <li role="presentation">
-                        <Link to="/search?text=www">Вернуться к результатам</Link>
                     </li>
                 </ul>
                 {question && question.title
@@ -188,7 +203,7 @@ class Question extends Component {
                 }
 
                 {question.answer_count > 0 ? (
-                        <div>
+                        <div id="answers">
                             <h2>Ответы</h2>
                             <ul className="answer-list">
                                 {
@@ -218,8 +233,6 @@ class Question extends Component {
                                 }
 
                             </ul>
-
-
                         </div>
                     )
                     : <p>Ответов пока нет :(</p>

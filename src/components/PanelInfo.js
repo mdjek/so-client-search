@@ -7,15 +7,15 @@ import {
 
 class PanelInfo extends Component {
     renderList = (typeList) => {
-        const { itemList } = this.props;
+        const { itemList, requestText } = this.props;
 
         switch (typeList) {
             case 'byTag': {
-                return <QuestionListByTag itemList={itemList} />
+                return <QuestionListByTag itemList={itemList} requestText={requestText} />
             }
 
             case 'byAuthor': {
-                return <QuestionListByAuthor itemList={itemList} />
+                return <QuestionListByAuthor itemList={itemList} requestText={requestText} />
             }
 
             default: return;

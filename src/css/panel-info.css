@@ -1,8 +1,12 @@
 .panel-info {
     border: 1px solid #ccc;
-    padding: 25px 15px 15px;
+    /*padding: 25px 15px 15px;*/
     border-radius: 5px;
     position: relative;
+}
+
+.panel-info h3 {
+    padding: 25px 15px 0;
 }
 
 .panel-info__close {
@@ -19,5 +23,9 @@
 
 .panel-info h4 {
     margin-top: 10px;
+}
+
+.panel-info .question-list li:last-child {
+    margin: 0;
 }
 
