@@ -3,6 +3,8 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@babel/polyfill": "^7.0.0",
+    "promise-polyfill": "^8.1.0",
     "axios": "^0.18.0",
     "bootstrap3": "^3.3.5",
     "connected-react-router": "^5.0.1",

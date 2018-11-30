@@ -1,3 +1,7 @@
+// ie
+import "@babel/polyfill";
+import Promise from 'promise-polyfill';
+
 import React from 'react';
 import { createStore, applyMiddleware, compose } from 'redux';
 import { render } from 'react-dom';
