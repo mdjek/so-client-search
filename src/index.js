@@ -1,5 +1,6 @@
 // ie
 import "@babel/polyfill";
+// eslint-disable-next-line
 import Promise from 'promise-polyfill';
 
 import React from 'react';

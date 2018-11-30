@@ -70,12 +70,14 @@ class QuestionList extends Component {
             </ul>
         );
     }
-};
+}
 
 QuestionList.propTypes = {
     itemList: PropTypes.arrayOf(
         PropTypes.shape(),
-    )
+    ),
+    getListByValue: PropTypes.func,
+    requestText: PropTypes.string,
 };
 
 QuestionList.defaulProps = {
