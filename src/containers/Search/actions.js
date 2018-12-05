@@ -1,21 +1,26 @@
 import api from '../../api/index';
 import AppHistory from '../../app/history';
 import * as actionTypes from './types';
+import { requestPending, requestRejected, resetRequestStatus } from '../../app/actions';
 import getQueryParams from '../../lib/utils/locationExtensions';
 
 export const goTo = (requestText) => () => {
     AppHistory.push(`/search/?text=${requestText}`);
 };
 
-export const getList = requestText => dispatch => (
-    api.questions.getList(requestText)
+export const getList = requestText => dispatch => {
+    dispatch(requestPending());
+
+    return api.questions.getList(requestText)
         .then((data) => {
             dispatch({
                 type: actionTypes.QUESTIONS_GET_FULFILLED,
                 questionData: data.items,
             });
+
+            dispatch(resetRequestStatus());
         })
-);
+};
 
 export const getRequestText = (requestText) => dispatch => {
     dispatch({
@@ -27,6 +32,8 @@ export const getRequestText = (requestText) => dispatch => {
 export const getListByValue = (typeList, properties) => (dispatch, getState) => {
     const prevPanelListParams = getState().SearchReducer.panelListParams;
 
+    dispatch(requestPending());
+
     if (prevPanelListParams.typeList !== typeList
             || prevPanelListParams.properties.name !== properties.name) {
 
@@ -36,14 +43,18 @@ export const getListByValue = (typeList, properties) => (dispatch, getState) => 
 
                 return (api.questions.getListByTag(name)
                     .then((data) => {
-                        console.log(data);
-
                         dispatch({
                             type: actionTypes.QUESTIONS_PANEL_QUESTIONS_GET_FULFILLED,
                             panelQuestionData: data.items,
                             panelListParams: {typeList, properties}
                         });
-                    }))
+
+                        dispatch(resetRequestStatus());
+                    })
+                    .catch(() => {
+                        dispatch(requestRejected());
+                    })
+                )
             }
 
             case 'byAuthor': {
@@ -51,14 +62,18 @@ export const getListByValue = (typeList, properties) => (dispatch, getState) => 
 
                 return (api.questions.getListByAuthor(id)
                     .then((data) => {
-                        console.log(data);
-
                         dispatch({
                             type: actionTypes.QUESTIONS_PANEL_QUESTIONS_GET_FULFILLED,
                             panelQuestionData: data.items,
                             panelListParams: {typeList, properties},
                         });
-                    }))
+
+                        dispatch(resetRequestStatus());
+                    })
+                    .catch(() => {
+                        dispatch(requestRejected());
+                    })
+                )
             }
 
             default: return;
@@ -72,11 +87,13 @@ export const resetPanel = () => dispatch => (
     })
 );
 
-export const reset = () => dispatch => (
+export const reset = () => dispatch => {
     dispatch({
         type: actionTypes.QUESTIONS_RESET,
-    })
-);
+    });
+
+    dispatch(resetRequestStatus());
+};
 
 export const init = () => dispatch => {
     const { location: { search } } = AppHistory;

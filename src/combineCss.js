@@ -9,6 +9,7 @@ import './css/helpers.css';
 import './css/shared/headings.css';
 
 // components
+import './css/components/spinner.css';
 import './css/components/nav.css';
 import './css/components/search-block.css';
 import './css/components/answer-list.css';

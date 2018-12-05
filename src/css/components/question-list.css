@@ -17,6 +17,7 @@
 
 .question-item__title {
     font-size: 20px;
+    word-break: break-word;
 }
 
 .question-item__author span {
