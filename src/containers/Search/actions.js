@@ -20,6 +20,9 @@ export const getList = requestText => dispatch => {
 
             dispatch(resetRequestStatus());
         })
+        .catch(() => {
+            dispatch(requestRejected());
+        })
 };
 
 export const getRequestText = (requestText) => dispatch => {
