@@ -1,5 +1,5 @@
 import React from 'react';
-import { Route, Switch } from 'react-router-dom';
+import { Route, Switch, Redirect } from 'react-router-dom';
 import { Main } from '../containers/Main/index';
 import { Search } from '../containers/Search/index';
 import { Question } from '../containers/Question/index';
@@ -10,6 +10,7 @@ const AppRoutes = () => (
         <Route exact path="/" component={Main} />
         <Route exact path="/search" component={Search} />
         <Route exact path="/question/:id" component={Question} />
+        <Redirect from="/so-client-search" to="/" />
         <Route component={NotFound} />
     </Switch>
 );
