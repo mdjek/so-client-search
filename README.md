@@ -14,4 +14,4 @@ https://mdjek.github.io/so-client-search/
 
 Для запуска проекта:
 
-### `yarn build`
+### `yarn run build`
