@@ -7,7 +7,7 @@ import { NotFound } from '../components/pageTemplates/index';
 
 const AppRoutes = () => (
     <Switch>
-        <Route exact path="/" component={Main} />
+        <Route exact path="so-client-search/" component={Main} />
         <Route exact path="/search" component={Search} />
         <Route exact path="/question/:id" component={Question} />        
         <Route component={NotFound} />
