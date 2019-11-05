@@ -9,5 +9,9 @@ https://mdjek.github.io/so-client-search/
 
 Для запуска проекта:
 
-### `npm i`
-### `npm start`
+### `yarn i`
+### `yarn start`
+
+Для запуска проекта:
+
+### `yarn build`
