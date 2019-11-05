@@ -7,11 +7,11 @@ React-приложение позволяет находить вопросы и
 
 https://mdjek.github.io/so-client-search/
 
-## Для запуска проекта:
+## Run dev mode:
 
 ### `yarn install`
 ### `yarn start`
 
-## Для сборки проекта:
+## Build project:
 
 ### `yarn run build`
