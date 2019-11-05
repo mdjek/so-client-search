@@ -6,14 +6,14 @@ import { Question } from '../containers/Question/index';
 import { NotFound } from '../components/pageTemplates/index';
 
 const AppRoutes = () => (
+  <BrowserRouter basename="/so-client-search">
     <Switch>
-        <BrowserRouter basename="/so-client-search">
           <Route exact path="/" component={Main} />
           <Route exact path="/search" component={Search} />
           <Route exact path="/question/:id" component={Question} />
           <Route component={NotFound} />
-        </BrowserRouter>
     </Switch>
+  </BrowserRouter>
 );
 
 export default AppRoutes;
