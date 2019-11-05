@@ -8,10 +8,11 @@ import { NotFound } from '../components/pageTemplates/index';
 const AppRoutes = () => (
   <BrowserRouter basename="/so-client-search">
     <Switch>
-      <Route exact path="/" component={Main} />
-      <Route path="/search" component={Search} />
-      <Route path="/question/:id" component={Question} />
-      <Route component={NotFound} />
+      <Route exact path="/" component={Main}>
+        <Route exact path="/search" component={Search} />
+        <Route exact path="/question/:id" component={Question} />
+        <Route component={NotFound} />
+      </Route>
     </Switch>
   </BrowserRouter>
 );
