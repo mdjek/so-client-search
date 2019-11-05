@@ -1,5 +1,5 @@
 import React from 'react';
-import { Route, Switch, Redirect } from 'react-router-dom';
+import { Route, Switch } from 'react-router-dom';
 import { Main } from '../containers/Main/index';
 import { Search } from '../containers/Search/index';
 import { Question } from '../containers/Question/index';
