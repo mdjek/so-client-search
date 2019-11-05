@@ -9,8 +9,7 @@ const AppRoutes = () => (
     <Switch>
         <Route exact path="/" component={Main} />
         <Route exact path="/search" component={Search} />
-        <Route exact path="/question/:id" component={Question} />
-        <Redirect from="/so-client-search" to="/" />
+        <Route exact path="/question/:id" component={Question} />        
         <Route component={NotFound} />
     </Switch>
 );
