@@ -22,7 +22,7 @@
   },
   "scripts": {
     "start": "react-scripts start",
-    "build": "cross-env PUBLIC_SUB_DIR=so-client-search && react-scripts build",
+    "build": "cross-env PUBLIC_SUB_DIR=so-client-search react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },

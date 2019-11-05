@@ -5,6 +5,9 @@ import { Search } from '../containers/Search/index';
 import { Question } from '../containers/Question/index';
 import { NotFound } from '../components/pageTemplates/index';
 
+console.log(process.env);
+console.log(process.env.PUBLIC_SUB_DIR);
+
 const AppRoutes = () => (
   <BrowserRouter basename={`/${process.env.PUBLIC_SUB_DIR}`}>
     <Switch>
