@@ -12,6 +12,6 @@ https://mdjek.github.io/so-client-search/
 ### `yarn i`
 ### `yarn start`
 
-Для запуска проекта:
+Для сборки проекта:
 
 ### `yarn run build`
