@@ -6,13 +6,12 @@ import { Question } from '../containers/Question/index';
 import { NotFound } from '../components/pageTemplates/index';
 
 const AppRoutes = () => (
-  <BrowserRouter basename="/so-client-search">
+  <BrowserRouter basename={`/${process.env.PUBLIC_SUB_DIR}`}>
     <Switch>
-      <Route exact path="/" component={Main}>
-        <Route exact path="/search" component={Search} />
-        <Route exact path="/question/:id" component={Question} />
-        <Route component={NotFound} />
-      </Route>
+      <Route exact path="/" component={Main} />
+      <Route exact path="/search" component={Search} />
+      <Route exact path="/question/:id" component={Question} />
+      <Route component={NotFound} />
     </Switch>
   </BrowserRouter>
 );

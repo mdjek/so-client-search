@@ -5,7 +5,7 @@ import { requestPending, requestRejected, resetRequestStatus } from '../../app/a
 import getQueryParams from '../../lib/utils/locationExtensions';
 
 export const goTo = (requestText) => () => {
-    AppHistory.push(`/search/?text=${requestText}`);
+    AppHistory.push(`${process.env.PUBLIC_SUB_DIR}/search/?text=${requestText}`);
 };
 
 export const getList = requestText => dispatch => {
