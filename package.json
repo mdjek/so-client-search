@@ -5,11 +5,11 @@
   "homepage": "https://mdjek.github.io/so-client-search/",
   "dependencies": {
     "@babel/polyfill": "^7.0.0",
-    "promise-polyfill": "^8.1.0",
     "axios": "^0.18.0",
     "bootstrap3": "^3.3.5",
     "connected-react-router": "^5.0.1",
     "history": "^4.7.2",
+    "promise-polyfill": "^8.1.0",
     "prop-types": "^15.6.2",
     "react": "^16.6.3",
     "react-dom": "^16.6.3",
@@ -22,7 +22,7 @@
   },
   "scripts": {
     "start": "react-scripts start",
-    "build": "react-scripts build PUBLIC_SUB_DIR=so-client-search",
+    "build": "cross-env PUBLIC_SUB_DIR=so-client-search react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
@@ -34,5 +34,8 @@
     "not dead",
     "not ie <= 11",
     "not op_mini all"
-  ]
+  ],
+  "devDependencies": {
+    "cross-env": "^6.0.3"
+  }
 }
