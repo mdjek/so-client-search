@@ -9,7 +9,7 @@ https://mdjek.github.io/so-client-search/
 
 ## Для запуска проекта:
 
-### `yarn i`
+### `yarn install`
 ### `yarn start`
 
 ## Для сборки проекта:
