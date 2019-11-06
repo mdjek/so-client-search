@@ -4,19 +4,30 @@ import { Main } from '../containers/Main/index';
 import { Search } from '../containers/Search/index';
 import { Question } from '../containers/Question/index';
 import { NotFound } from '../components/pageTemplates/index';
+import publictUrl from '../publicUrl';
 
-console.log(process.env);
-console.log(process.env.PUBLIC_SUB_DIR);
+const AppRoutes = () => {
+  if (process.env.NODE_ENV === 'development') {
+    return (
+      <Switch>
+        <Route exact path="/" component={Main} />
+        <Route exact path="/search" component={Search} />
+        <Route exact path="/question/:id" component={Question} />
+        <Route component={NotFound} />
+      </Switch>
+    );
+  }
 
-const AppRoutes = () => (
-  <BrowserRouter basename={`/${process.env.PUBLIC_SUB_DIR}`}>
-    <Switch>
-      <Route exact path="/" component={Main} />
-      <Route exact path="/search" component={Search} />
-      <Route exact path="/question/:id" component={Question} />
-      <Route component={NotFound} />
-    </Switch>
-  </BrowserRouter>
-);
+  return (
+    <BrowserRouter basename={publictUrl[process.env.NODE_ENV]}>
+      <Switch>
+        <Route exact path="/" component={Main} />
+        <Route exact path="/search" component={Search} />
+        <Route exact path="/question/:id" component={Question} />
+        <Route component={NotFound} />
+      </Switch>
+    </BrowserRouter>
+  );
+};
 
 export default AppRoutes;

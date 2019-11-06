@@ -3,9 +3,14 @@ import AppHistory from '../../app/history';
 import * as actionTypes from './types';
 import { requestPending, requestRejected, resetRequestStatus } from '../../app/actions';
 import getQueryParams from '../../lib/utils/locationExtensions';
+import publictUrl from '../../publicUrl';
 
 export const goTo = (requestText) => () => {
-    AppHistory.push(`${process.env.PUBLIC_SUB_DIR}/search/?text=${requestText}`);
+    AppHistory.push(
+      `${process.env.NODE_ENV === 'development'
+      ? ''
+      : publictUrl[process.env.NODE_ENV]}/search/?text=${requestText}`
+    );
 };
 
 export const getList = requestText => dispatch => {
