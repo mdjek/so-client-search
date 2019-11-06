@@ -7,7 +7,6 @@ import { tsToDate } from '../../lib/utils/dateExtensions';
 import { Link } from 'react-router-dom';
 import AppHistory from '../../app/history';
 import getQueryParams from '../../lib/utils/locationExtensions';
-import publictUrl from '../../publicUrl';
 
 class Question extends Component {
     componentDidMount() {
@@ -66,14 +65,12 @@ class Question extends Component {
                     {
                         this.getRequestText() && (
                             <li role="presentation">
-                                <Link to={`${process.env.NODE_ENV === 'development'
-                                  ? ''
-                                  : publictUrl[process.env.NODE_ENV]}/search/?text=${this.getRequestText()}`}>← Вернуться к результатам</Link>
+                                <Link to={`/search/?text=${this.getRequestText()}`}>← Вернуться к результатам</Link>
                             </li>
                         )
                     }
                     <li role="presentation">
-                        <Link to={publictUrl[process.env.NODE_ENV]}>Новый поиск</Link>
+                        <Link to="/">Новый поиск</Link>
                     </li>
                 </ul>
 

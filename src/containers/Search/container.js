@@ -6,7 +6,6 @@ import { Link } from 'react-router-dom';
 import { QuestionList } from '../../components/lists/index';
 import PanelInfo from '../../components/PanelInfo';
 import * as actions from './actions';
-// import publictUrl from '../../publicUrl';
 
 class Search extends Component {
     componentDidMount() {
