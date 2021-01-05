@@ -5,7 +5,7 @@
   "homepage": "https://mdjek.github.io/so-client-search/",
   "dependencies": {
     "@babel/polyfill": "^7.0.0",
-    "axios": "^0.18.0",
+    "axios": "^0.21.1",
     "bootstrap3": "^3.3.5",
     "connected-react-router": "^5.0.1",
     "history": "^4.7.2",
